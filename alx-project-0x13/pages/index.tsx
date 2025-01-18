@@ -6,7 +6,10 @@ import React, { useEffect, useState } from 'react';
 const Home: React.FC = () => {
   const [prompt, setPrompt] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<string>('');
-  const { isLoading, responseData, generatedImages, fetchData } = useFetchData<any,{ prompt: string }>();
+  const { isLoading, responseData, generatedImages, fetchData } = useFetchData<
+    { message: string },
+    { prompt: string }
+  >();
 
   const handleGenerateImage = () => {
     fetchData('/api/generate-image', { prompt });
@@ -14,9 +17,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      setImageUrl(responseData?.message);
+      setImageUrl(responseData?.message || '');
     }
-  }, [isLoading]);
+  }, [isLoading, responseData?.message]);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
