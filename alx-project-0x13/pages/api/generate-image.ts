@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   const gptApiKey = process.env.NEXT_PUBLIC_GPT_API_KEY;
-  const gptUrl = 'https://chatgpt-42.p.rapidapi.com/texttoimage';
+  const gptUrl = 'https://chatgpt-42.p.rapidapi.com/texttoimage3';
 
   if (!gptApiKey || !gptUrl) {
     return response
@@ -21,10 +21,11 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         text: prompt,
         width: WIDTH,
         height: HEIGHT,
+        steps: 1,
       }),
       headers: {
         'x-rapidapi-key': gptApiKey.trim(),
-        'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
+        'x-rapidapi-host': 'chatgpt-vision1.p.rapidapi.com',
         'Content-Type': 'application/json',
       },
     });
